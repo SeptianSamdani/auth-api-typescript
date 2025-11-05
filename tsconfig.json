@@ -10,11 +10,11 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
 
-    "types": ["node"],
+    "types": ["node", "jest"],
     "strict": true,
     "sourceMap": true,
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
