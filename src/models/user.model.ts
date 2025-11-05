@@ -1,4 +1,4 @@
-import pool from '../config/db';
+import pool from '../db/index'; 
 
 export interface User {
   id?: number;

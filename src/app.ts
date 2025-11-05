@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import routes from './routes/index';
+import { errorHandler, notFound } from './middlewares/error.middleware';
 
 const app: Application = express();
 
@@ -17,16 +18,15 @@ app.use(compression());
 // Routes
 app.use('/api', routes);
 
-// Root route
 app.get('/', (_, res) => {
-  res.send({
-    message: 'Welcome to Auth API (TypeScript + Express + PostgreSQL)',
+  res.json({
+    message: 'Auth API - TypeScript + Express + PostgreSQL',
+    version: '1.0.0',
   });
 });
 
-// Error handling (simple)
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
-});
+// Error handling
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;

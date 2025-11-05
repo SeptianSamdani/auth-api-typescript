@@ -1,29 +1,11 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import { AuthController } from '../controllers/auth.controller';
+import { validate } from '../middlewares/validate.middleware';
+import { registerSchema, loginSchema } from '../validators/auth.validator';
 
 const router = Router();
 
-/**
- * @route POST /api/auth/register
- * @desc Register a new user
- */
-router.post('/register', async (req: Request, res: Response) => {
-  return res.json({ message: 'Register endpoint (to be implemented)' });
-});
-
-/**
- * @route POST /api/auth/login
- * @desc Login user and return JWT
- */
-router.post('/login', async (req: Request, res: Response) => {
-  return res.json({ message: 'Login endpoint (to be implemented)' });
-});
-
-/**
- * @route POST /api/auth/reset-password
- * @desc Reset user password
- */
-router.post('/reset-password', async (req: Request, res: Response) => {
-  return res.json({ message: 'Reset password endpoint (to be implemented)' });
-});
+router.post('/register', validate(registerSchema), AuthController.register);
+router.post('/login', validate(loginSchema), AuthController.login);
 
 export default router;

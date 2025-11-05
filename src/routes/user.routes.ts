@@ -1,29 +1,18 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import { authenticate, authorize, AuthRequest } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-/**
- * @route GET /api/users/profile
- * @desc Get user profile (protected)
- */
-router.get('/profile', async (req: Request, res: Response) => {
-  return res.json({ message: 'Get user profile (to be implemented)' });
+router.get('/profile', authenticate, async (req: AuthRequest, res) => {
+  res.json({ message: 'User profile', user: req.user });
 });
 
-/**
- * @route PUT /api/users/profile
- * @desc Update user profile (protected)
- */
-router.put('/profile', async (req: Request, res: Response) => {
-  return res.json({ message: 'Update user profile (to be implemented)' });
+router.put('/profile', authenticate, async (req: AuthRequest, res) => {
+  res.json({ message: 'Update profile' });
 });
 
-/**
- * @route GET /api/users
- * @desc Get all users (admin only)
- */
-router.get('/', async (req: Request, res: Response) => {
-  return res.json({ message: 'Get all users (admin only, to be implemented)' });
+router.get('/', authenticate, authorize('admin'), async (req: AuthRequest, res) => {
+  res.json({ message: 'All users (admin only)' });
 });
 
 export default router;
