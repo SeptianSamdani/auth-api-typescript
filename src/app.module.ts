@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { User } from './users/entities/user.entity';
 import { Document } from './documents/entities/document.entity';
 import { Approval } from './approvals/entities/approval.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { Approval } from './approvals/entities/approval.entity';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
